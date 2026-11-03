@@ -1,0 +1,12 @@
+node_modules/
+out/
+.omc/
+*.vsix
+.vscode-test/
+.vscode-ui-test/
+*.log
+coverage/
+.DS_Store
+Thumbs.db
+tmp-*
+vscode-*.png

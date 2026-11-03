@@ -1,0 +1,48 @@
+{
+  "scopeName": "source.efile",
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#string" },
+    { "include": "#tag" },
+    { "include": "#line-marker" }
+  ],
+  "repository": {
+    "comment": {
+      "patterns": [
+        {
+          "match": "(^\\s*)(//.*)$",
+          "captures": {
+            "1": { "name": "punctuation.definition.comment.efile" },
+            "2": { "name": "comment.line.double-slash.efile" }
+          }
+        }
+      ]
+    },
+    "string": {
+      "name": "string.quoted.single.efile",
+      "begin": "'",
+      "end": "'",
+      "beginCaptures": { "0": { "name": "punctuation.definition.string.begin.efile" } },
+      "endCaptures": { "0": { "name": "punctuation.definition.string.end.efile" } }
+    },
+    "tag": {
+      "patterns": [
+        {
+          "match": "</?(!?)([^>]+?)(!?>)",
+          "captures": {
+            "0": { "name": "entity.name.tag.efile" },
+            "1": { "name": "punctuation.definition.tag.efile" },
+            "2": { "name": "entity.name.type.efile" },
+            "3": { "name": "punctuation.definition.tag.efile" }
+          }
+        }
+      ]
+    },
+    "line-marker": {
+      "patterns": [
+        { "match": "(^\\s*)(@@|@|#|\\$|%)(?=\\s|$)", "captures": { "2": { "name": "keyword.operator.marker.efile" } } },
+        { "match": "(^\\s*)(@@|@|#|\\$|%)(?=\\S)", "captures": { "2": { "name": "keyword.operator.marker.efile" } } }
+      ]
+    }
+  }
+}

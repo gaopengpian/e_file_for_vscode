@@ -1,0 +1,168 @@
+{
+  "name": "efile-language-support",
+  "displayName": "E-File Language Support",
+  "description": "Language support for China Electric Power System E-Language files.",
+  "version": "0.1.4",
+  "publisher": "536f8f74-6f8f-612e-b02d-11545322a06b",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antigravity/efile"
+  },
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onLanguage:efile",
+    "onLanguage:plaintext",
+    "onView:efile.structure"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "efile",
+        "aliases": [
+          "E-File",
+          "E Language"
+        ],
+        "extensions": [
+          ".e",
+          ".E",
+          ".dt",
+          ".cim",
+          ".cime"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "efile",
+        "scopeName": "source.efile",
+        "path": "./syntaxes/efile.tmLanguage.json"
+      }
+    ],
+    "configurationDefaults": {
+      "files.associations": {
+        "*.e": "efile",
+        "*.E": "efile",
+        "*.dt": "efile",
+        "*.cim": "efile",
+        "*.cime": "efile"
+      },
+      "[efile]": {
+        "files.encoding": "gbk",
+        "files.autoGuessEncoding": false,
+        "editor.stickyScroll.enabled": true
+      }
+    },
+    "commands": [
+      {
+        "command": "efile.formatDocument",
+        "title": "E-File: Format Document",
+        "category": "E-File"
+      },
+      {
+        "command": "efile.showStructure",
+        "title": "E-File: Show Structure",
+        "category": "E-File"
+      },
+      {
+        "command": "efile.reopenWithGBK",
+        "title": "E-File: Reopen with GBK",
+        "category": "E-File"
+      },
+      {
+        "command": "efile.compressLargeFile",
+        "title": "E-File: Compress Large File Copy",
+        "category": "E-File"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "efile.formatDocument",
+        "key": "ctrl+alt+shift+e",
+        "mac": "cmd+alt+shift+e",
+        "when": "editorTextFocus && editorLangId == efile"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "efile.formatDocument",
+          "group": "navigation@100",
+          "when": "editorTextFocus && editorLangId == efile"
+        },
+        {
+          "command": "efile.compressLargeFile",
+          "group": "navigation@101",
+          "when": "resourceScheme == file && (resourceExtname == .e || resourceExtname == .E || resourceExtname == .dt || resourceExtname == .cim || resourceExtname == .cime)"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "efile.compressLargeFile",
+          "group": "navigation@101",
+          "when": "resourceExtname == .e || resourceExtname == .E || resourceExtname == .dt || resourceExtname == .cim || resourceExtname == .cime"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "efile.formatDocument",
+          "when": "editorLangId == efile"
+        },
+        {
+          "command": "efile.showStructure",
+          "when": "editorLangId == efile"
+        }
+      ]
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "efile.structure",
+          "name": "E-File Structure",
+          "contextualTitle": "E-File Structure"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "E-File",
+      "properties": {
+        "efile.enableRainbowColumns": {
+          "type": "boolean",
+          "default": true,
+          "description": "Color data columns cyclically on @ and # lines."
+        },
+        "efile.enableHoverDetails": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show table, field, and value details when hovering over data."
+        },
+        "efile.formatting.maxBytes": {
+          "type": "number",
+          "default": 1048576,
+          "minimum": 1,
+          "description": "Maximum UTF-8 document size formatted by E-File. Rainbow column coloring also stops above 1 MiB; hover, structure, and folding remain available."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run compile && node --test out/test/*.test.js",
+    "package": "npm run compile && npx --yes @vscode/vsce package --no-dependencies",
+    "release": "node scripts/release.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/vscode": "^1.90.0",
+    "@vscode/vsce": "^3.2.0",
+    "typescript": "^5.7.2"
+  }
+}

@@ -1,0 +1,10 @@
+node_modules/
+.vscode-test/
+*.vsix
+src/
+tsconfig.json
+out/test/
+out/**/*.map
+tmp-formatter-probe.js
+.vscode-ui-test/**
+vscode-*.png

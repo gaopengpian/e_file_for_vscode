@@ -1,0 +1,13 @@
+{
+  "comments": {
+    "lineComment": "//"
+  },
+  "brackets": [],
+  "wordPattern": "(-?\\d*\\.\\d\\w*)|([^\\s<>\\"'`]+)",
+  "folding": {
+    "markers": {
+      "start": "^\\s*<(?!!|/)",
+      "end": "^\\s*</"
+    }
+  }
+}
