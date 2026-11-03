@@ -46,4 +46,4 @@ npm run check
 npm run package
 ```
 
-正式更新使用 `npm run release`：脚本先运行测试和类型检查；通过后自动递增 patch 版本并同步 `package.json` 与 `package-lock.json`，随后打包并安装新版 VSIX。交互式终端会询问是否立即重载；非交互环境会打印 `Developer: Reload Window` 手动重载提示。每次发布仅运行一次该命令；勿重复运行以免多次递增版本。
+正式更新使用 `npm run release`：本地运行测试和类型检查、递增 patch 版本、打包并安装新版 VSIX。推送到 `main` 后，GitHub Actions 会再次验证，递增 patch 版本并提交 `package.json` 与 `package-lock.json`，创建 `v<版本号>` 标签及 GitHub Release，并附上 `.vsix` 安装包。每次推送都会发布一个 patch 版本。
