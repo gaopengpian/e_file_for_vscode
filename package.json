@@ -2,7 +2,7 @@
   "name": "efile-language-support",
   "displayName": "E-File Language Support",
   "description": "Language support for China Electric Power System E-Language files.",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "publisher": "536f8f74-6f8f-612e-b02d-11545322a06b",
   "repository": {
     "type": "git",
