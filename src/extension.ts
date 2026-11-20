@@ -63,10 +63,9 @@ export function activate(context: vscode.ExtensionContext): void {
   };
   const showStructure = async (document: vscode.TextDocument): Promise<void> => {
     if (!shouldShowStructure(document.languageId)) return;
-    await vscode.commands.executeCommand('workbench.view.explorer');
     structure.refresh(document);
     const firstModule = structure.getFirstModule();
-    if (firstModule) await tree.reveal(firstModule, { focus: false, select: false, expand: 1 });
+    if (firstModule && tree.visible) await tree.reveal(firstModule, { focus: false, select: false, expand: 1 });
   };
   const revealStructureItem = async (key: string): Promise<void> => {
     const editor = vscode.window.activeTextEditor;
@@ -129,7 +128,7 @@ export function activate(context: vscode.ExtensionContext): void {
       if (event.textEditor.document.languageId === 'efile') {
         decorations.refreshActive(event.textEditor);
         const item = structure.revealAt(event.textEditor, event.selections[0].active);
-        if (item) void tree.reveal(item, { focus: false, select: true, expand: true });
+        if (item && tree.visible) void tree.reveal(item, { focus: false, select: true, expand: true });
       }
     }),
     vscode.workspace.onDidChangeTextDocument((event) => {
